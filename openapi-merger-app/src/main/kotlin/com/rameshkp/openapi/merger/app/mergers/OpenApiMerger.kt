@@ -17,6 +17,7 @@ class OpenApiMerger: Mergeable<OpenAPI> {
     private val tagsMerger = ListMerger<Tag>()
     private val securityMerger = ListMerger<SecurityRequirement>()
     private val pathsMerger = PathsMerger()
+    private val webhooksMerger = WebhooksMerger()
     private val componentsMerger = ComponentsMerger()
 
     override fun merge(from: OpenAPI?) {
@@ -28,6 +29,10 @@ class OpenApiMerger: Mergeable<OpenAPI> {
             // Merge the paths
             log.info("Merging paths")
             pathsMerger.merge(this.paths)
+
+            // Merge the webhooks
+            log.info("Merging webhooks")
+            webhooksMerger.merge(this.webhooks)
 
             // Merge the components
             log.info("Merging components")
@@ -46,6 +51,7 @@ class OpenApiMerger: Mergeable<OpenAPI> {
     override fun get(): OpenAPI? {
         openAPI.servers = serversMerger.get()
         openAPI.paths = pathsMerger.get()
+        openAPI.webhooks = webhooksMerger.get()
         openAPI.components = componentsMerger.get()
         openAPI.security = securityMerger.get()
         openAPI.tags = tagsMerger.get()

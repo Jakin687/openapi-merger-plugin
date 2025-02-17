@@ -20,7 +20,7 @@ class WebhooksMergerTest : BehaviorSpec({
                 pathItem2.get = mockk()
 
                 webhook1.addWebhooks("newPet", pathItem1)
-                webhook1.addWebhooks("removePet", pathItem2)
+                webhook2.addWebhooks("removePet", pathItem2)
 
                 val webhookMerger = WebhooksMerger()
                 webhookMerger.merge(webhook1.webhooks)

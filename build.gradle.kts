@@ -3,7 +3,7 @@ plugins {
     kotlin("jvm") version "1.4.20" apply false
     id("net.researchgate.release") version "2.8.1"
     id("io.kotest") version "0.2.6" apply false
-    id("org.jetbrains.dokka") version "1.4.10.2" apply false
+    id("org.jetbrains.dokka") version "2.0.0" apply false
 }
 
 val localRepository = "$buildDir/openapi-repo"
@@ -14,6 +14,7 @@ allprojects {
     project.extra["localRepository"] = localRepository
 
     repositories {
+        mavenLocal()
         mavenCentral()
         jcenter()
     }

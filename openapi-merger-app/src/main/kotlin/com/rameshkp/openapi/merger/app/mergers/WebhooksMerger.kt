@@ -12,6 +12,12 @@ class WebhooksMerger: MapMerger<PathItem>() {
     override fun get(): Map<String, PathItem> {
         val openApi = OpenAPI()
         map.forEach { (key, value) ->  openApi.addWebhooks(key, value)}
+
+        // For apis below version 3.1.0
+        if (openApi.webhooks == null) {
+            return emptyMap()
+        }
+
         return openApi.webhooks
     }
 }
